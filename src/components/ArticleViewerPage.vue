@@ -19,13 +19,13 @@
           </button>
         </router-link>
         <button type="button" v-on:click="deleteArticle" v-if="writer === $store.getters.getUserId ||
-          $store.getters.getPermission === 2"
+          $store.getters.getPermission === '2'"
                 class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
           삭제
         </button>
         <router-link :to="'/board/article/modify/' + this.$route.params.articleIdx">
           <button type="button" v-if="writer === $store.getters.getUserId ||
-            $store.getters.getPermission === 2"
+            $store.getters.getPermission === '2'"
                   class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
             수정
           </button>
@@ -63,7 +63,7 @@
                 </div>
                 <button type="button" @click="deleteComment(cmt.comment_idx)" v-if="cmt.user_id ===
                   $store.getters.getUserId ||
-          $store.getters.getPermission === 2"
+          $store.getters.getPermission === '2'"
                         class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
                   삭제
                 </button>
