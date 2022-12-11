@@ -5,18 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5436968e-40bb-409b-bf5a-a9dfa18091dc" name="변경" comment="변경">
-      <change afterPath="$PROJECT_DIR$/src/components/AdminConsole.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ArticleEditorPage.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ArticleViewerPage.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/BoardPage.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/LoginPage.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/MainPage.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/MyPage.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/PasswordFindPage.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/SignupPage.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/StockInfo.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitigonre" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/아카이브.zip" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
