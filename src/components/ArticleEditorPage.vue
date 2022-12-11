@@ -75,14 +75,14 @@ export default {
   },
 
   watch: {
-    p_pre_script: function (newVal) {
+    content: function (newVal) {
       this.editor.commands.setContent(newVal)
     },
   },
 
   mounted() {
     this.editor = new Editor({
-      content: this.p_pre_script,
+      content: this.content,
       onUpdate: () => {
         this.$emit('input', this.editor.getHTML())
       },
@@ -107,6 +107,20 @@ export default {
     catch((error) => {
       console.log(error);
     });
+
+    if(this.$router.currentRoute.params.articleIdx) {
+      axios.get('/api/article/' + this.$router.currentRoute.params.articleIdx).
+      then((response) => {
+        this.title = response.data.title;
+        this.article_stock = response.data.stock_code;
+        this.article_topic = response.data.topic;
+        this.editor.commands.setContent(response.data.content);
+        this.$forceUpdate()
+      }).
+      catch((error) => {
+        console.log(error);
+      });
+    }
   },
 
   beforeDestroy() {
@@ -117,6 +131,7 @@ export default {
     return {
       title: "",
       editor: null,
+      content: "",
 
       stockList: [
         {
@@ -138,21 +153,40 @@ export default {
 
   methods: {
     submitArticle() {
-      const data = {
-        stock_code: this.article_stock,
-        title: this.title,
-        content: this.editor.getHTML(),
-        topic: this.article_topic // "discussion" or "general"
+      if(this.$router.currentRoute.params.articleIdx) {
+        const data = {
+          article_id: this.$router.currentRoute.params.articleIdx,
+          stock_code: this.article_stock,
+          title: this.title,
+          content: this.editor.getHTML(),
+          topic: this.article_topic // "discussion" or "general"
+        }
+        axios.put('/api/article/', data).
+        then((response) => {
+          console.log(response);
+          this.$router.push('/board/');
+        }).
+        catch((error) => {
+          console.log(error);
+        });
       }
-      console.log(data);
+      else {
+        const data = {
+          stock_code: this.article_stock,
+          title: this.title,
+          content: this.editor.getHTML(),
+          topic: this.article_topic // "discussion" or "general"
+        }
 
-      axios.post('/api/article', data)
-        .then(() => { // 성공시에 200, 실패하면 400번대로
-          this.$router.push({ name: 'ArticleList' });
-        })
-        .catch(error => {
-          console.log(error)
-        })
+        axios.post('/api/article', data).
+        then((response) => {
+          console.log(response);
+          this.$router.push('/board/');
+        }).
+        catch((error) => {
+          console.log(error);
+        });
+      }
     }
   }
 }

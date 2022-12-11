@@ -23,6 +23,13 @@
                 class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
           삭제
         </button>
+        <router-link :to="'/board/article/modify/' + this.$route.params.articleIdx">
+          <button type="button" v-if="writer === $store.getters.getUserId ||
+            $store.getters.getPermission === 2"
+                  class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+            수정
+          </button>
+        </router-link>
       </div>
       <div id="comment-container" class="mt-5 pt-5 border-gray-600 border-t flex flex-col gap-5">
         <label class="block text-sm font-medium text-gray-900 dark:text-gray-400">댓글</label>
@@ -40,23 +47,26 @@
         </div>
 
         <div id="prev-comment">
-          <ul class="max-w-md divide-y divide-gray-200 dark:divide-gray-700">
+          <ul class="divide-y divide-gray-200 dark:divide-gray-700">
             <li class="py-3 sm:pb-4" v-for="cmt in commentList" v-bind:key="cmt">
-              <div class="flex items-center space-x-4">
+              <div class="flex flex-row items-center space-x-4">
                 <div class="min-w-0 border-r-2 border-gray-300 px-4">
                   <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                    {{ cmt.user_id }}
+                    {{ cmt.user_name }}
                   </p>
                   <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                    {{ cmt.date }}
-                  </p>
-                  <p v-if="cmt.userId === $store.getters.getUserId" v-on:click="deleteComment(cmt.commentIdx)">
-                    <i class="fa-solid fa-x text-red-900"></i>
+                    {{ cmt.user_id }}
                   </p>
                 </div>
                 <div class="flex-1 items-center text-base font-semibold text-gray-900 dark:text-white">
                   {{ cmt.content }}
                 </div>
+                <button type="button" @click="deleteComment(cmt.comment_idx)" v-if="cmt.user_id ===
+                  $store.getters.getUserId ||
+          $store.getters.getPermission === 2"
+                        class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+                  삭제
+                </button>
               </div>
             </li>
           </ul>
@@ -134,6 +144,7 @@ export default {
       writer: "dummy",
 
       comment: "",
+      commentEditTarget: 0,
 
       commentList: [
           {
@@ -167,12 +178,22 @@ export default {
       axios.delete('/api/comment/' + commentIdx)
         .then(res => {
           console.log(res)
+          alert("댓글이 삭제되었습니다.")
           this.getCommentList()
         })
         .catch(error => {
           alert("댓글 삭제에 실패했습니다.")
           console.log(error)
         })
+    },
+
+    editMode(e) {
+      this.commentEditTarget = e.target.target
+      console.log(e.target.target)
+      this.$forceUpdate()
+    },
+    updateComment(commentIdx) {
+      console.log(commentIdx)
     },
 
     getCommentList() {

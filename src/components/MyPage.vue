@@ -310,7 +310,7 @@
                        @change="radioChange($event)">
               </th>
               <th class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white" scope="row">
-                <router-link :to="{path: '/stock/info/' + stock.code}">
+                <router-link :to="{path: '/stock/info/' + stock.stock_code}">
                   {{ stock.cop_name }}
                 </router-link>
               </th>

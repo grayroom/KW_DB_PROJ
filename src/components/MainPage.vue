@@ -356,6 +356,14 @@ export default {
           .then(response => {
             this.stockUpList = response.data.upstock
             this.stockDownList = response.data.downstock
+            this.stockUpList.map((item) => {
+              item.volume = String(item.volume).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+              item.price = String(item.price).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            })
+            this.stockDownList.map((item) => {
+              item.volume = String(item.volume).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+              item.price = String(item.price).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            })
 
             this.$refs.loading1.style.display = 'none'
             this.$refs.loading2.style.display = 'none'

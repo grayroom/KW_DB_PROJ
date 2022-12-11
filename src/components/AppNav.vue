@@ -274,6 +274,7 @@ export default {
 
       this.getJumpedStock()
       this.getNewlyConfirmedList()
+      this.$forceUpdate()
     }
   },
 }

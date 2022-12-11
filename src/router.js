@@ -61,6 +61,12 @@ const route = [
     name: 'articleViewer',
     beforeEnter: authFilter(),
   },
+  {
+    path: '/board/article/modify/:articleIdx',
+    component: () => import('@/components/ArticleEditorPage'),
+    name: 'articleModify',
+    beforeEnter: authFilter(),
+  },
 
   {
     path: '/login',

@@ -267,6 +267,7 @@ export default {
             .then(() => {
               alert((this.trade === 'buy' ? '[매수주문] ' : '[매도주문] ') + this.corp.cop_name + ' ' + this.order_amount +
                   " 주 / " + this.order_price + " KRW");
+              this.$router.go(0)
             })
             .catch((err) => {
               console.log(err);
